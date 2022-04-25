@@ -1,0 +1,51 @@
+[
+    {
+        "name": "satuan-zakat",
+        "title": "Satuan Zakat",
+        "to": "/backoffice/satuan-zakat",
+        "icon": "el-icon-set-up",
+        "children": []
+    },
+    {
+        "name": "rt-rw",
+        "title": "RT/RW",
+        "to": "/backoffice/rw-rt",
+        "icon": "el-icon-collection-tag",
+        "children": []
+    },
+    {
+        "name": "mustahik-type",
+        "title": "Tipe Mustahik",
+        "to": "/backoffice/mustahik-type",
+        "icon": "el-icon-box",
+        "children": []
+    },
+    {
+        "name": "mustahik-status",
+        "title": "Status Mustahik",
+        "to": "/backoffice/mustahik-status",
+        "icon": "el-icon-news",
+        "children": []
+    },
+    {
+        "name": "daftar-warga",
+        "title": "Daftar Warga",
+        "to": "/backoffice/people",
+        "icon": "el-icon-user",
+        "children": []
+    },
+    {
+        "name": "zakat",
+        "title": "Daftar Zakat",
+        "to": "/backoffice/zakat",
+        "icon": "el-icon-notebook-2",
+        "children": []
+    },
+    {
+        "name": "mustahik",
+        "title": "Mustahik",
+        "to": "/backoffice/mustahik",
+        "icon": "el-icon-coordinate",
+        "children": []
+    }
+]

@@ -1,0 +1,71 @@
+.el-menu-item.no-link {
+    cursor: default;
+
+    &:hover {
+        background-color: #5865F2 !important;
+    }
+}
+
+.second-sidebar {
+    .el-menu {
+        .el-menu-item:hover {
+            @apply tw-bg-primary_dark tw-opacity-70
+        }
+
+        .el-sub-menu {
+            :hover {
+                @apply tw-bg-primary_dark tw-opacity-70
+            }
+
+            .el-sub-menu__title:hover {
+                @apply tw-bg-primary_dark tw-opacity-70
+            }
+        }
+    }
+
+    .is-active {
+        @apply tw-text-white tw-bg-primary
+    }
+
+    .el-menu--popup {
+        @apply tw-bg-white
+    }
+}
+
+.first-sidebar {
+    .el-menu-item {
+        transition: 0.2s all;
+        background-color: #5865F2;
+
+        &:hover {
+            @apply tw-rounded-bl-full tw-rounded-tl-full tw-bg-primary_dark tw-opacity-70
+        }
+
+        &::before {
+            @apply tw-bg-primary
+        }
+
+        &::after {
+            @apply tw-bg-primary
+        }
+
+        &.is-active {
+            transition: 0s all;
+            @apply tw-rounded-bl-full tw-rounded-tl-full tw-bg-primary_dark
+        }
+    }
+
+    i {
+        @apply tw-text-white
+    }
+}
+
+.sidebar-overlay {
+    transition: 0.5s all;
+    background-color: #000;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 9;
+    opacity: 0.4;
+}
