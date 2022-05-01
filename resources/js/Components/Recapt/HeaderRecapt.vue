@@ -1,7 +1,13 @@
 <template>
   <div id="header-recapt">
     <el-row :gutter="20">
-      <el-col :span="12">
+      <el-col
+        :xs="24"
+        :sm="24"
+        :md="12"
+        :lg="12"
+        :xl="12"
+      >
         <el-card shadow="never">
           <el-row :gutter="20">
             <el-col
@@ -159,10 +165,18 @@ export default {
     display: flex;
     flex-direction: column-reverse;
 
+    @media only screen and (max-width: 600px) {
+      display: contents;     
+    }
+
     .img-illustration {
       width: 400px;
       position: absolute;
       top: -8rem;
+
+      @media only screen and (max-width: 600px) {
+        display: none !important;
+      }
     }
 
     .data-illustration {

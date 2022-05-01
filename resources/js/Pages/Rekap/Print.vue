@@ -1,7 +1,6 @@
 <template>
   <div id="printMe">
     <PrintLayout
-      v-if="zakatTable.length"
       :title="'Rekap'"
     >
       <div>
@@ -21,7 +20,10 @@
 
         <el-divider />
       
-        <div class="tw-pb-6">
+        <div
+          class="tw-pb-8"
+          style="margin-bottom: 50rem !important;"
+        >
           <h1 class="tw-text-xl tw-font-semibold tw-mb-6">
             Tabel Data Penerimaan Zakat
           </h1>
@@ -33,7 +35,7 @@
           />
         </div>
 
-        <div>
+        <div style="margin-bottom: 40rem !important; padding-top: 5rem !important;">
           <h1 class="tw-text-xl tw-font-semibold tw-mb-6">
             Tabel Data Penggunaan Zakat
           </h1>
@@ -59,7 +61,7 @@
           />
         </div>
 
-        <div>
+        <div style="margin-bottom: 40rem !important; padding-top: 5rem !important;">
           <h1 class="tw-text-xl tw-font-semibold tw-mb-6">
             Tabel Amil
           </h1>
@@ -69,7 +71,7 @@
           />
         </div>
 
-        <div>
+        <div style="padding-top: 5rem !important;">
           <h1 class="tw-text-xl tw-font-semibold tw-mb-6">
             Data Rekap Hasil
           </h1>
@@ -79,16 +81,17 @@
             :tambahan="zakatTambahan"
             :mustahik-status="mustahikStatus.data"
             :mustahik-summary="mustahikListSummary"
+            :satuan="satuan"
             class="tw-mb-8"
           />
         </div>
       </div>
     </PrintLayout>
 
-    <el-empty
+    <!-- <el-empty
       v-else
       description="Belum ada data yang ditambahkan"
-    />
+    /> -->
   </div>
 </template>
 

@@ -6,19 +6,37 @@
     <el-row
       :gutter="24"
     >
-      <el-col :span="17">
+      <el-col
+        :xs="24"
+        :sm="24"
+        :md="17"
+        :lg="17"
+        :xl="17"
+      >
         <el-row
           :gutter="24"
           class="left-fit-section"
         >
-          <el-col :span="8">
+          <el-col
+            :xs="24"
+            :sm="24"
+            :md="8"
+            :lg="8"
+            :xl="8"
+          >
             <AmountBungkus
               :count-zakat="countZakat"
               :is-loading="isLoadingCountZakat"
               @click="getCountZakatOnYear"
             />
           </el-col>
-          <el-col :span="16">
+          <el-col
+            :xs="24"
+            :sm="24"
+            :md="16"
+            :lg="16"
+            :xl="16"
+          >
             <div class="tw-mb-6">
               <h1 class="tw-font-semibold tw-text-4xl tw-mb-2">
                 Zakat Fitrah {{ year }}
@@ -41,13 +59,25 @@
           class="tw-mb-6"
         />
       </el-col>
-      <el-col :span="1">
+      <el-col
+        :xs="24"
+        :sm="24"
+        :md="1"
+        :lg="1"
+        :xl="1"
+      >
         <el-divider
           direction="vertical"
           class="tw-h-full tw-opacity-60"
         />
       </el-col>
-      <el-col :span="6">
+      <el-col
+        :xs="24"
+        :sm="24"
+        :md="6"
+        :lg="6"
+        :xl="6"
+      >
         <RecentZakat
           v-loading="loadingRecentZakat"
           :data-all="recentZakat"
@@ -159,5 +189,9 @@ export default {
 .left-fit-section {
   position: relative;
   left: -4rem;
+
+  @media only screen and (max-width: 600px) {
+    left: 0rem;
+  }
 }
 </style>

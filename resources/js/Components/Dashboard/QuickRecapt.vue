@@ -8,7 +8,11 @@
         :gutter="20"
       >
         <el-col
-          :span="11"
+          :xs="24"
+          :sm="24"
+          :md="11"
+          :lg="11"
+          :xl="11"
         >
           <div v-if="satuan && pembagian.length">
             <div class="tw-mb-2 tw-flex tw-w-full tw-justify-between">
@@ -34,13 +38,25 @@
             description="Belum ada data"
           />
         </el-col>
-        <el-col :span="2">
+        <el-col
+          :xs="24"
+          :sm="24"
+          :md="2"
+          :lg="2"
+          :xl="2"
+        >
           <el-divider
             direction="vertical"
             class="tw-h-full tw-opacity-60"
           />
         </el-col>
-        <el-col :span="11">
+        <el-col
+          :xs="24"
+          :sm="24"
+          :md="11"
+          :lg="11"
+          :xl="11"
+        >
           <div>
             Daftar Penerima
           </div>

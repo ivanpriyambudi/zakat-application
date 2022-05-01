@@ -13,7 +13,19 @@
       <el-table-column
         prop="data"
         align="center"
-      />
+      >
+        <template #default="scope">
+          {{ scope.row.data }} <b>{{ satuan.name }}</b>
+        </template>
+      </el-table-column>
+      <el-table-column
+        prop="kilo"
+        align="center"
+      >
+        <template #default="scope">
+          {{ scope.row.kilo }} <b>Kg</b>
+        </template>
+      </el-table-column>
     </el-table>
   </div>
 </template>
@@ -40,6 +52,10 @@ export default {
     mustahikSummary: {
       type: Array,
       default: () => ([]),
+    },
+    satuan: {
+      type: Object,
+      default: () => ({}),
     },
   },
   data() {
@@ -93,18 +109,21 @@ export default {
       return {
         title: 'Total Zakat diterima',
         data: this.totalMasuk,
+        kilo: this.totalMasuk * this.satuan.kilo,
       }
     },
     dataAmil() {
       return {
         title: 'Total Amil',
         data: this.totaKebutuhanAmil,
+        kilo: this.totaKebutuhanAmil * this.satuan.kilo,
       }
     },
     dataSisa() {
       return {
         title: 'Sisa',
         data: this.totalMasuk - this.totalKebutuhan,
+        kilo: (this.totalMasuk - this.totalKebutuhan) * this.satuan.kilo,
       }
     },
     dataTable() {
@@ -117,6 +136,7 @@ export default {
         const datas = {
           title: el.data.name,
           data: el.summary,
+          kilo: el.summary * this.satuan.kilo,
         }
         data.push(datas)
       })

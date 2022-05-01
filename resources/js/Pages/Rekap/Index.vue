@@ -8,7 +8,13 @@
         v-if="zakatTable.length && !loadingZakatTable"
         :gutter="20"
       >
-        <el-col :span="16">
+        <el-col
+          :xs="24"
+          :sm="24"
+          :md="16"
+          :lg="16"
+          :xl="16"
+        >
           <div class="tw-mb-4">
             <div v-if="satuan">
               <HeaderRecapt
@@ -41,7 +47,13 @@
             :satuan="satuan"
           />
         </el-col>
-        <el-col :span="8">
+        <el-col
+          :xs="24"
+          :sm="24"
+          :md="8"
+          :lg="8"
+          :xl="8"
+        >
           <PembagianTable
             :status="status.data"
             :satuan="satuan"
