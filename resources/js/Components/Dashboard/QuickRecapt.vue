@@ -4,26 +4,35 @@
       shadow="always"
       class="tw-border-0"
     >
-      <el-row :gutter="20">
+      <el-row
+        :gutter="20"
+      >
         <el-col
           :span="11"
         >
-          <div class="tw-mb-2 tw-flex tw-w-full tw-justify-between">
-            <span>Pembagian</span> 
-            <span>{{ satuan.name }}</span>
-          </div>
-          <el-scrollbar height="120px">
-            <div class="tw-pr-4">
-              <div
-                v-for="(item, index) in pembagian"
-                :key="`list-item-pembagian-${index}`"
-                class="list-content"
-              >
-                <div>{{ item.name }}</div>
-                <div>{{ item.distribution }}</div>
-              </div>
+          <div v-if="satuan && pembagian.length">
+            <div class="tw-mb-2 tw-flex tw-w-full tw-justify-between">
+              <span>Pembagian</span> 
+              <span>{{ satuan.name }}</span>
             </div>
-          </el-scrollbar>
+            <el-scrollbar height="120px">
+              <div class="tw-pr-4">
+                <div
+                  v-for="(item, index) in pembagian"
+                  :key="`list-item-pembagian-${index}`"
+                  class="list-content"
+                >
+                  <div>{{ item.name }}</div>
+                  <div>{{ item.distribution }}</div>
+                </div>
+              </div>
+            </el-scrollbar>
+          </div>
+
+          <el-empty
+            v-else
+            description="Belum ada data"
+          />
         </el-col>
         <el-col :span="2">
           <el-divider
@@ -35,7 +44,7 @@
           <div>
             Daftar Penerima
           </div>
-          <div>
+          <div v-if="mustahik.length">
             <el-scrollbar>
               <div class="scrollbar-flex-content">
                 <div
@@ -54,6 +63,11 @@
               </div>
             </el-scrollbar>
           </div>
+
+          <el-empty
+            v-else
+            description="Belum ada data"
+          />
         </el-col>
       </el-row>
     </el-card>

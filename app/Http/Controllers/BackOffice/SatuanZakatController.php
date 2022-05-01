@@ -50,7 +50,7 @@ class SatuanZakatController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string',
-            'kilo' => 'required|integer',
+            'kilo' => 'required|numeric',
             'is_primary' => 'nullable|integer',
         ]);
 
@@ -96,7 +96,7 @@ class SatuanZakatController extends Controller
     {
         $validated = $this->validate($request, [
             'name' => 'required|string',
-            'kilo' => 'required|integer',
+            'kilo' => 'required|numeric',
             'is_primary' => 'nullable|integer',
         ]);
 

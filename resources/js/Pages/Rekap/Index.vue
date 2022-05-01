@@ -3,7 +3,10 @@
     :title="'Rekap'"
     :breadcumb="breadcumb"
   >
-    <el-row :gutter="20">
+    <el-row
+      v-if="zakatTable.length"
+      :gutter="20"
+    >
       <el-col :span="16">
         <div class="tw-mb-4">
           <HeaderRecapt
@@ -36,6 +39,11 @@
         <AmilConfig :data="amil" />
       </el-col>
     </el-row>
+
+    <el-empty
+      v-else
+      description="Belum ada data yang ditambahkan"
+    />
   </AdminLayout>
 </template>
 

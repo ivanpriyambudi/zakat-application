@@ -1,6 +1,7 @@
 <template>
   <div id="printMe">
     <PrintLayout
+      v-if="zakatTable.length"
       :title="'Rekap'"
     >
       <div>
@@ -83,6 +84,11 @@
         </div>
       </div>
     </PrintLayout>
+
+    <el-empty
+      v-else
+      description="Belum ada data yang ditambahkan"
+    />
   </div>
 </template>
 

@@ -16,7 +16,7 @@ class CreateSatuanZakatsTable extends Migration
         Schema::create('satuan_zakats', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->integer('kilo');
+            $table->float('kilo');
             $table->boolean('is_primary')->default(0);
             $table->timestamps();
         });

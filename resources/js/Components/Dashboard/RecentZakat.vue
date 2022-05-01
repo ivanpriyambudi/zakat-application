@@ -10,10 +10,7 @@
         </div>
       </template>
       <div class="line-section">
-        <div class="title">
-          Seluruh Perangkat
-        </div>
-        <el-timeline>
+        <el-timeline v-if="dataAll.length">
           <el-timeline-item
             v-for="(item, index) in dataAll"
             :key="`list-recent-all-zakat-${index}`"
@@ -24,6 +21,11 @@
             {{ `${item.type === 'Fitrah' ? 'Zakat Fitrah' : item.type} ${item.amount} ${item.amount_type.name}` }}
           </el-timeline-item>
         </el-timeline>
+
+        <el-empty
+          v-else
+          description="Belum ada data"
+        />
       </div>
 
       <!-- <el-divider />
