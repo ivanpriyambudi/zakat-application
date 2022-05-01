@@ -4,7 +4,6 @@
     :breadcumb="breadcumb"
   >
     <el-row
-      v-if="zakatTable.length && !loadingZakatTable"
       :gutter="20"
     >
       <el-col
@@ -14,8 +13,11 @@
         :lg="16"
         :xl="16"
       >
-        <div class="tw-mb-4">
-          <div v-if="satuan">
+        <div
+          v-loading="loadingZakatTable"
+          class="tw-mb-4"
+        >
+          <div v-if="zakatTable.length && !loadingZakatTable && satuan">
             <HeaderRecapt
               :satuan="satuan"
               :zakat="zakatTable"
