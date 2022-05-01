@@ -10,6 +10,7 @@ use App\Models\SatuanZakat;
 use App\Models\MustahikStatus;
 use App\Models\Mustahik;
 use Illuminate\Support\Facades\DB;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class ZakatApiController extends Controller
 {
@@ -159,16 +160,27 @@ class ZakatApiController extends Controller
 
     public function getZakatPenerimaTambahan()
     {
-        $mustahik = Mustahik::where('distribution', '!=', null)
+        $mustahik = QueryBuilder::for(Mustahik::class)
+            ->where('distribution', '!=', null)
             ->with([
                 'rw',
                 'rt',
                 'mustahik_type',
                 'mustahik_status',
             ])
-            ->get();
+            ->paginate($this->getLimit());
 
         return response()->json($mustahik);
+    }
+
+    public function getSummaryZakatPenerimaTambahan()
+    {
+        $mustahik = Mustahik::where('distribution', '!=', null)
+            ->get();
+
+        $sum = $mustahik->sum('distribution');
+
+        return response()->json($sum);
     }
 
     public function getTambahanZakatRt()

@@ -22,7 +22,6 @@
         v-else
         :data="data"
         style="width: 100%"
-        show-summary
       >
         <el-table-column
           label="Mustahik"
@@ -42,7 +41,6 @@
         </el-table-column>
         <el-table-column
           prop="distribution"
-          sortable
           align="center"
         >
           <template #header>
@@ -76,6 +74,11 @@
           </template>
         </el-table-column>
       </el-table>
+
+      <PaginationApi
+        :meta="meta"
+        :on-change="onLoad"
+      />
     </el-card>
 
     <el-drawer
@@ -138,11 +141,13 @@
 
 <script>
 import AddPenerimaTambahan from '../Drawer/AddPenerimaTambahan.vue'
+import PaginationApi from '../Commons/PaginationApi.vue'
 import {Inertia} from '@inertiajs/inertia'
 
 export default {
   components: {
     AddPenerimaTambahan,
+    PaginationApi,
   },
   props: {
     rw: {
@@ -163,6 +168,14 @@ export default {
     },
     satuan: {
       type: Object,
+      default: () => ({}),
+    },
+    meta: {
+      type: Object,
+      default: () => ({}),
+    },
+    onLoad: {
+      type: Function,
       default: () => ({}),
     },
   },

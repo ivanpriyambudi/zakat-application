@@ -88,8 +88,8 @@ export default {
       default: () => ([]),
     },
     tambahan: {
-      type: Array,
-      default: () => ([]),
+      type: Number,
+      default: 0,
     },
     amil: {
       type: Object,
@@ -135,10 +135,8 @@ export default {
       return 0
     },
     totalKebutuhanTambahan() {
-      if (this.tambahan.length) {
-        return this.tambahan.reduce((accumulator, object) => {
-          return accumulator + object.distribution
-        }, 0)
+      if (this.tambahan) {
+        return this.tambahan
       }
       return 0
     },

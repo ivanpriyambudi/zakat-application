@@ -35,4 +35,5 @@ Route::group(['prefix' => 'backoffice'], function () {
     Route::get('/mustahik/recapt', [ZakatApiController::class, 'getSummaryPenerima']);
     Route::get('/mustahik/recapt', [ZakatApiController::class, 'getSummaryPenerima']);
     Route::post('/people/search', [PeopleApiController::class, 'getSearch']);
+    Route::get('/zakat-tambahan/summary', [ZakatApiController::class, 'getSummaryZakatPenerimaTambahan']);
 });

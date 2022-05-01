@@ -3,73 +3,73 @@
     :title="'Rekap'"
     :breadcumb="breadcumb"
   >
-    <div v-loading="loadingZakatTable">
-      <el-row
-        v-if="zakatTable.length && !loadingZakatTable"
-        :gutter="20"
+    <el-row
+      v-if="zakatTable.length && !loadingZakatTable"
+      :gutter="20"
+    >
+      <el-col
+        :xs="24"
+        :sm="24"
+        :md="16"
+        :lg="16"
+        :xl="16"
       >
-        <el-col
-          :xs="24"
-          :sm="24"
-          :md="16"
-          :lg="16"
-          :xl="16"
-        >
-          <div class="tw-mb-4">
-            <div v-if="satuan">
-              <HeaderRecapt
-                :satuan="satuan"
-                :zakat="zakatTable"
-                :amil="amil"
-                :tambahan="zakatTambahan"
-                :doa="doa"
-              />
-            </div>
-            <div v-else>
-              <el-alert
-                title="Satuan Zakat belum ditentukan"
-                type="warning"
-                :closable="false"
-              />
-            </div>
+        <div class="tw-mb-4">
+          <div v-if="satuan">
+            <HeaderRecapt
+              :satuan="satuan"
+              :zakat="zakatTable"
+              :amil="amil"
+              :tambahan="zakatTambahanSummary"
+              :doa="doa"
+            />
           </div>
-          <ZakatTable
-            v-loading="loadingZakatTable"
-            :data="zakatTable"
-            :satuan="satuan"
-            :mustahik-status="mustahikStatus.data"
-          />
-          <CustomPembagian
-            v-loading="loadingZakatTambahan"
-            :rw="rw.data"
-            :mustahik-type="mustahikType.data"
-            :mustahik-status="mustahikStatus.data"
-            :data="zakatTambahan"
-            :satuan="satuan"
-          />
-        </el-col>
-        <el-col
-          :xs="24"
-          :sm="24"
-          :md="8"
-          :lg="8"
-          :xl="8"
-        >
-          <PembagianTable
-            :status="status.data"
-            :satuan="satuan"
-          />
-          <AmilConfig
-            :data="amil"
-            :satuan="satuan"
-          />
-          <DoaConfig
-            :data="doa"
-            :satuan="satuan"
-          />
-        </el-col>
-      </el-row>
-    </div>
+          <div v-else>
+            <el-alert
+              title="Satuan Zakat belum ditentukan"
+              type="warning"
+              :closable="false"
+            />
+          </div>
+        </div>
+        <ZakatTable
+          v-loading="loadingZakatTable"
+          :data="zakatTable"
+          :satuan="satuan"
+          :mustahik-status="mustahikStatus.data"
+        />
+        <CustomPembagian
+          v-loading="loadingZakatTambahan"
+          :rw="rw.data"
+          :mustahik-type="mustahikType.data"
+          :mustahik-status="mustahikStatus.data"
+          :data="zakatTambahan"
+          :satuan="satuan"
+          :meta="metaZakatTambahan"
+          :on-load="getZakatTambahan"
+        />
+      </el-col>
+      <el-col
+        :xs="24"
+        :sm="24"
+        :md="8"
+        :lg="8"
+        :xl="8"
+      >
+        <PembagianTable
+          :status="status.data"
+          :satuan="satuan"
+        />
+        <AmilConfig
+          :data="amil"
+          :satuan="satuan"
+        />
+        <DoaConfig
+          :data="doa"
+          :satuan="satuan"
+        />
+      </el-col>
+    </el-row>
 
     <el-empty
       v-if="!zakatTable.length && !loadingZakatTable"
@@ -140,11 +140,17 @@ export default {
       loadingZakatTambahan: false,
       zakatTable: [],
       zakatTambahan: [],
+      metaZakatTambahan: {
+        current_page: 1,
+        last_page: 1,
+      },
+      zakatTambahanSummary: 0,
     }
   },
   created() {
     this.getZakatDataRt()
     this.getZakatTambahan()
+    this.getZakatTambahanSummary()
   },
   methods: {
     getZakatDataRt() {
@@ -155,11 +161,27 @@ export default {
           this.loadingZakatTable = false
         })
     },
-    getZakatTambahan() {
+    getZakatTambahan(page = 1) {
       this.loadingZakatTambahan = true
-      axios.get('/api/backoffice/zakat-tambahan/recapt')
+      axios.get('/api/backoffice/zakat-tambahan/recapt', {
+        params: {
+          page: page,
+        },
+      })
         .then(res => {
-          this.zakatTambahan = res.data
+          this.zakatTambahan = res.data.data
+
+          this.metaZakatTambahan.current_page = res.data.current_page
+          this.metaZakatTambahan.last_page = res.data.last_page
+
+          this.loadingZakatTambahan = false
+        })
+    },
+    getZakatTambahanSummary() {
+      this.loadingZakatTambahan = true
+      axios.get('/api/backoffice/zakat-tambahan/summary')
+        .then(res => {
+          this.zakatTambahanSummary = res.data
           this.loadingZakatTambahan = false
         })
     },
