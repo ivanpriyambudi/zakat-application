@@ -86,7 +86,7 @@ class MustahikStatusController extends Controller
      */
     public function edit($mustahikStatusId)
     {
-        $mustahik_status = MustahikStatus::find($mustahikStatusId)
+        $mustahik_status = MustahikStatus::where('id', $mustahikStatusId)
             ->first();
 
         $satuan = SatuanZakat::where('is_primary', 1)->first();

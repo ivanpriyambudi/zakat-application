@@ -67,8 +67,23 @@
               label="Nama"
               prop="nama"
             >
-              <el-input v-model="ruleForm.name" />
+              <el-input
+                v-model="ruleForm.name"
+                v-loading="loadingRecomendation"
+                @change="onSearchPeople"
+              />
             </el-form-item>
+
+            <el-row v-if="listRecomendation.length">
+              <el-button
+                v-for="(item, index) in listRecomendation"
+                :key="`list-recomendation-${index}`"
+                size="small"
+                @click="initValueRecomendation(item)"
+              >
+                {{ item.name }} ({{ item.rw.name }} / {{ item.rt.name }})
+              </el-button>
+            </el-row>
           </el-card>
         </el-col>
       </el-row>
@@ -151,6 +166,7 @@
 
 <script>
 import {Inertia} from '@inertiajs/inertia'
+import axios from 'axios'
 
 export default {
   props: {
@@ -202,6 +218,8 @@ export default {
         amount_type_id: '',
         amount: '',
       },
+      listRecomendation: [],
+      loadingRecomendation: false,
     }
   },
   computed: {
@@ -260,6 +278,28 @@ export default {
     },
     onChange() {
       this.rt = null
+    },
+    onSearchPeople() {
+      this.listRecomendation = []
+      this.loadingRecomendation = true
+
+      const data = {
+        keyword: this.ruleForm.name,
+      }
+
+      axios.post('/api/backoffice/people/search', data)
+        .then(res => {
+          this.listRecomendation = res.data
+          this.loadingRecomendation = false
+        })
+    },
+    initValueRecomendation(value) {
+      // eslint-disable-next-line vue/no-mutating-props
+      this.ruleForm.name = value.name
+      // eslint-disable-next-line vue/no-mutating-props
+      this.ruleForm.rw_id = value.rw_id
+      // eslint-disable-next-line vue/no-mutating-props
+      this.ruleForm.rt_id = value.rt_id
     },
   },
 }

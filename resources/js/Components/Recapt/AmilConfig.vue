@@ -53,7 +53,7 @@
           Kebutuhan
         </el-col>
         <el-col :span="12">
-          {{ distribution * amount }}
+          {{ distribution * amount }} {{ satuan.name }} ({{ satuan.kilo * distribution * amount }} Kg)
         </el-col>
       </el-row>
 
@@ -82,6 +82,10 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    satuan: {
+      type: Object,
+      default: () => ({}),
+    },
   },
   data() {
     return {
@@ -92,6 +96,7 @@ export default {
   },
   methods: {
     onSubmit() {
+      console.log(this.amount)
       Inertia.visit(`${window.baseUrl}/recapt/set-amil`, {
         method: 'POST',
         data: {

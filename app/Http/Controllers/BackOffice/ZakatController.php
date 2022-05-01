@@ -141,7 +141,7 @@ class ZakatController extends Controller
      */
     public function edit($zakatId)
     {
-        $zakat = Zakat::find($zakatId)
+        $zakat = Zakat::where('id', $zakatId)
             ->with([
                 'people',
                 'amount_type',

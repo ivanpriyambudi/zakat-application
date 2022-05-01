@@ -84,7 +84,7 @@ class PeopleController extends Controller
      */
     public function edit($peopleId)
     {
-        $people = People::find($peopleId)
+        $people = People::where('id', $peopleId)
             ->with([
                 'rw',
                 'rt',

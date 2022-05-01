@@ -35,11 +35,11 @@
           </el-row>
           <el-divider class="tw-mb-4" />
           <div class="tw-text-center">
-            Total: <span class="tw-font-bold">{{ totalMasuk }}</span> {{ satuan.name }}
+            Total: <span class="tw-font-bold">{{ totalMasuk }}</span> {{ satuan.name }} ({{ satuan.kilo * totalMasuk }} Kg)
           </div>
           <el-divider class="tw-mb-4" />
           <div class="tw-text-center">
-            Kebutuhan: <span class="tw-font-bold">{{ totalKebutuhan }}</span> {{ satuan.name }}
+            Kebutuhan: <span class="tw-font-bold">{{ totalKebutuhan }}</span> {{ satuan.name }} ({{ satuan.kilo * totalKebutuhan }} Kg)
           </div>
         </el-card>
       </el-col>
@@ -92,7 +92,10 @@ export default {
   },
   computed: {
     totalKebutuhanAmil() {
-      return this.amil.amount * this.amil.distribution
+      if (this.amil) {
+        return this.amil.amount * this.amil.distribution
+      }
+      return 0
     },
     totalZakat() {
       if (this.zakat.length) {

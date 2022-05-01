@@ -3,45 +3,59 @@
     :title="'Rekap'"
     :breadcumb="breadcumb"
   >
-    <el-row
-      v-if="zakatTable.length"
-      :gutter="20"
-    >
-      <el-col :span="16">
-        <div class="tw-mb-4">
-          <HeaderRecapt
+    <div v-loading="loadingZakatTable">
+      <el-row
+        v-if="zakatTable.length && !loadingZakatTable"
+        :gutter="20"
+      >
+        <el-col :span="16">
+          <div class="tw-mb-4">
+            <div v-if="satuan">
+              <HeaderRecapt
+                :satuan="satuan"
+                :zakat="zakatTable"
+                :amil="amil"
+                :tambahan="zakatTambahan"
+              />
+            </div>
+            <div v-else>
+              <el-alert
+                title="Satuan Zakat belum ditentukan"
+                type="warning"
+                :closable="false"
+              />
+            </div>
+          </div>
+          <ZakatTable
+            v-loading="loadingZakatTable"
+            :data="zakatTable"
             :satuan="satuan"
-            :zakat="zakatTable"
-            :amil="amil"
-            :tambahan="zakatTambahan"
+            :mustahik-status="mustahikStatus.data"
           />
-        </div>
-        <ZakatTable
-          v-loading="loadingZakatTable"
-          :data="zakatTable"
-          :satuan="satuan"
-          :mustahik-status="mustahikStatus.data"
-        />
-        <CustomPembagian
-          v-loading="loadingZakatTambahan"
-          :rw="rw.data"
-          :mustahik-type="mustahikType.data"
-          :mustahik-status="mustahikStatus.data"
-          :data="zakatTambahan"
-          :satuan="satuan"
-        />
-      </el-col>
-      <el-col :span="8">
-        <PembagianTable
-          :status="status.data"
-          :satuan="satuan"
-        />
-        <AmilConfig :data="amil" />
-      </el-col>
-    </el-row>
+          <CustomPembagian
+            v-loading="loadingZakatTambahan"
+            :rw="rw.data"
+            :mustahik-type="mustahikType.data"
+            :mustahik-status="mustahikStatus.data"
+            :data="zakatTambahan"
+            :satuan="satuan"
+          />
+        </el-col>
+        <el-col :span="8">
+          <PembagianTable
+            :status="status.data"
+            :satuan="satuan"
+          />
+          <AmilConfig
+            :data="amil"
+            :satuan="satuan"
+          />
+        </el-col>
+      </el-row>
+    </div>
 
     <el-empty
-      v-else
+      v-if="!zakatTable.length && !loadingZakatTable"
       description="Belum ada data yang ditambahkan"
     />
   </AdminLayout>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\KodeGeneratorController;
 use App\Http\Controllers\Api\ZakatApiController;
 use App\Http\Controllers\Api\MustahikApiController;
 use App\Http\Controllers\Api\MustahiStatusApiController;
+use App\Http\Controllers\Api\PeopleApiController;
 use App\Http\Middleware\AdminMiddleware;
 
 /*
@@ -32,4 +33,6 @@ Route::group(['prefix' => 'backoffice'], function () {
     Route::get('/zakat-tambahan/recapt', [ZakatApiController::class, 'getZakatPenerimaTambahan']);
     Route::get('/zakat-tambahan-rt/recapt', [ZakatApiController::class, 'getTambahanZakatRt']);
     Route::get('/mustahik/recapt', [ZakatApiController::class, 'getSummaryPenerima']);
+    Route::get('/mustahik/recapt', [ZakatApiController::class, 'getSummaryPenerima']);
+    Route::post('/people/search', [PeopleApiController::class, 'getSearch']);
 });

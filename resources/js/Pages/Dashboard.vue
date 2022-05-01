@@ -38,6 +38,7 @@
         <CountZakatTable
           v-loading="loadingZakatTable"
           :data="zakatTable"
+          class="tw-mb-6"
         />
       </el-col>
       <el-col :span="1">

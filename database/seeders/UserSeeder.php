@@ -22,6 +22,11 @@ class UserSeeder extends Seeder
             'type' => 'admin',
         ]);
 
+        DB::table('amils')->insert([
+            'amount' => 1,
+            'distribution' => 1,
+        ]);
+
         // $satuan = ['kg', 'bungkus', 'liter', 'renteng', 'kerdus', 'pack'];
         // foreach ($satuan as $key) {
         //     DB::table('satuans')->insert([

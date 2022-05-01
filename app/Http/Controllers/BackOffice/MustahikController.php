@@ -132,7 +132,7 @@ class MustahikController extends Controller
      */
     public function edit($mustahikId)
     {
-        $mustahik = Mustahik::find($mustahikId)
+        $mustahik = Mustahik::where('id', $mustahikId)
             ->with([
                 'rw',
                 'rt',
