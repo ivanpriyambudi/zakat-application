@@ -65,6 +65,9 @@
             />
           </el-select>
         </div>
+        <div class="tw-mr-4">
+          <el-button>Data Sinkronasi</el-button>
+        </div>
       </div>
     </div>
 
