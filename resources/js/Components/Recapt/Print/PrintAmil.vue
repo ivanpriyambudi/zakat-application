@@ -27,10 +27,19 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    doa: {
+      type: Object,
+      default: () => ({}),
+    },
   },
   data() {
     return {
-      data: [this.amil],
+      data: [
+        {
+          amount: this.amil.amount + this.doa.amount,
+          distribution: `${this.amil.distribution} (Amil Do'a ${this.doa.distribution})`,
+        },
+      ],
     }
   },
 }

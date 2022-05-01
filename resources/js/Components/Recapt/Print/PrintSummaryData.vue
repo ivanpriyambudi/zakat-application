@@ -45,6 +45,10 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    doa: {
+      type: Object,
+      default: () => ({}),
+    },
     tambahan: {
       type: Array,
       default: () => ([]),
@@ -102,6 +106,9 @@ export default {
     totaKebutuhanAmil() {
       return this.amil.amount * this.amil.distribution
     },
+    totaKebutuhanDoa() {
+      return this.doa.amount * this.doa.distribution
+    },
     totalKebutuhan() {
       return this.totalKebutuhanZakat + this.totalKebutuhanTambahan + this.totaKebutuhanAmil
     },
@@ -115,8 +122,8 @@ export default {
     dataAmil() {
       return {
         title: 'Total Amil',
-        data: this.totaKebutuhanAmil,
-        kilo: this.totaKebutuhanAmil * this.satuan.kilo,
+        data: this.totaKebutuhanAmil + this.totaKebutuhanDoa,
+        kilo: (this.totaKebutuhanAmil * this.satuan.kilo) + (this.totaKebutuhanDoa * this.satuan.kilo),
       }
     },
     dataSisa() {

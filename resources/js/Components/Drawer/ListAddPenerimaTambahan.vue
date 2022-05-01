@@ -27,39 +27,41 @@
       </el-tag>
     </div>
 
-    <div>
-      <el-table
-        :data="data"
-        style="width: 100%"
-      >
-        <el-table-column
-          prop="name"
-          label="Nama"
-        />
-        <el-table-column
-          prop="distribution"
-          label="Tambahan"
+    <el-scrollbar height="500px">
+      <div>
+        <el-table
+          :data="data"
+          style="width: 100%"
         >
-          <template #default="scope">
-            {{ scope.row.distribution ? scope.row.distribution : 0 }}
-          </template>
-        </el-table-column>
-        <el-table-column
-          label=""
-        >
-          <template #default="scope">
-            <div class="tw-text-right">
-              <el-button
-                type="text"
-                @click="onOpenAddValue(scope.row)"
-              >
-                Tambah
-              </el-button>
-            </div>
-          </template>
-        </el-table-column>
-      </el-table>
-    </div>
+          <el-table-column
+            prop="name"
+            label="Nama"
+          />
+          <el-table-column
+            prop="distribution"
+            label="Tambahan"
+          >
+            <template #default="scope">
+              {{ scope.row.distribution ? scope.row.distribution : 0 }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label=""
+          >
+            <template #default="scope">
+              <div class="tw-text-right">
+                <el-button
+                  type="text"
+                  @click="onOpenAddValue(scope.row)"
+                >
+                  Tambah
+                </el-button>
+              </div>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+    </el-scrollbar>
 
     <el-dialog
       v-model="modalAddValue"

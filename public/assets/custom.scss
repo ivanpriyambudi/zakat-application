@@ -4,3 +4,23 @@
         display: none !important;
     }
 }
+
+.menu-navbar {
+    background-color: transparent !important;
+    border: 0;
+    color: #fff;
+    padding: 0 !important;
+    font-size: 2rem;
+}
+
+.header-nav {
+    @media only screen and (max-width: 600px) {
+        display: flex !important;
+        align-items: center;
+    }
+}
+
+.title-header {
+    margin-left: 1rem;
+    color: #fff;
+}

@@ -8,6 +8,7 @@ use Inertia\Inertia;
 use App\Models\Rw;
 use App\Models\Mustahik;
 use App\Models\Amil;
+use App\Models\Doa;
 use App\Models\SatuanZakat;
 use App\Models\MustahikStatus;
 use App\Models\MustahikType;
@@ -35,6 +36,8 @@ class RecaptController extends Controller
 
         $amil = Amil::where('id', 1)->first();
 
+        $doa = Doa::where('id', 1)->first();
+
         return Inertia::render('Rekap/Index', [
             'rw' => RwResource::collection($rw),
             'status' => MustahikStatusResource::collection($status),
@@ -42,6 +45,7 @@ class RecaptController extends Controller
             'mustahikStatus' => MustahikStatusResource::collection($mustahik_status),
             'mustahikType' => MustahikTypeResource::collection($mustahik_type),
             'amil' => $amil,
+            'doa' => $doa,
         ]);
     }
 
@@ -59,6 +63,16 @@ class RecaptController extends Controller
     public function setAmil(Request $request)
     {
         $amil = Amil::find(1);
+        $amil->amount = $request['amount'];
+        $amil->distribution = $request['distribution'];
+        $amil->update();
+
+        return redirect()->back();
+    }
+
+    public function setDoa(Request $request)
+    {
+        $amil = Doa::find(1);
         $amil->amount = $request['amount'];
         $amil->distribution = $request['distribution'];
         $amil->update();
@@ -101,6 +115,8 @@ class RecaptController extends Controller
 
         $amil = Amil::where('id', 1)->first();
 
+        $doa = Doa::where('id', 1)->first();
+
         return Inertia::render('Rekap/Print', [
             'rw' => RwResource::collection($rw),
             'status' => MustahikStatusResource::collection($status),
@@ -108,6 +124,7 @@ class RecaptController extends Controller
             'mustahikStatus' => MustahikStatusResource::collection($mustahik_status),
             'mustahikType' => MustahikTypeResource::collection($mustahik_type),
             'amil' => $amil,
+            'doa' => $doa,
         ]);
     }
 }

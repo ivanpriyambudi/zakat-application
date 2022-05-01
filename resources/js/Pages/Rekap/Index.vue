@@ -22,6 +22,7 @@
                 :zakat="zakatTable"
                 :amil="amil"
                 :tambahan="zakatTambahan"
+                :doa="doa"
               />
             </div>
             <div v-else>
@@ -62,6 +63,10 @@
             :data="amil"
             :satuan="satuan"
           />
+          <DoaConfig
+            :data="doa"
+            :satuan="satuan"
+          />
         </el-col>
       </el-row>
     </div>
@@ -80,6 +85,7 @@ import PembagianTable from '../../Components/Recapt/PembagianTable.vue'
 import CustomPembagian from '../../Components/Recapt/CustomPembagian.vue'
 import HeaderRecapt from '../../Components/Recapt/HeaderRecapt.vue'
 import AmilConfig from '../../Components/Recapt/AmilConfig.vue'
+import DoaConfig from '../../Components/Recapt/DoaConfig.vue'
 import axios from 'axios'
 
 export default {
@@ -90,6 +96,7 @@ export default {
     CustomPembagian,
     HeaderRecapt,
     AmilConfig,
+    DoaConfig,
   },
   props : {
     rw: {
@@ -113,6 +120,10 @@ export default {
       default: () => ({}),
     },
     amil: {
+      type: Object,
+      default: () => ({}),
+    },
+    doa: {
       type: Object,
       default: () => ({}),
     },

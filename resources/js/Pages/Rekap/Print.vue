@@ -67,6 +67,7 @@
           </h1>
           <PrintAmil
             :amil="amil"
+            :doa="doa"
             class="tw-mb-8"
           />
         </div>
@@ -78,6 +79,7 @@
           <PrintSummaryData
             :zakat="zakatTable"
             :amil="amil"
+            :doa="doa"
             :tambahan="zakatTambahan"
             :mustahik-status="mustahikStatus.data"
             :mustahik-summary="mustahikListSummary"
@@ -136,6 +138,10 @@ export default {
       default: () => ({}),
     },
     amil: {
+      type: Object,
+      default: () => ({}),
+    },
+    doa: {
       type: Object,
       default: () => ({}),
     },

@@ -49,6 +49,7 @@ Route::group(['prefix' => 'backoffice'], function () {
         Route::get('/recapt/print', [RecaptController::class, 'printPage']);
         Route::put('/recapt/update-value-distribution', [RecaptController::class, 'updateValueDistribution']);
         Route::post('/recapt/set-amil', [RecaptController::class, 'setAmil']);
+        Route::post('/recapt/set-doa', [RecaptController::class, 'setDoa']);
         Route::get('/mustahik/delete-tambahan/{id}', [RecaptController::class, 'deleteTambahan']);
         Route::post('/mustahik/update-tambahan/{id}', [RecaptController::class, 'updateTambahan']);
     });

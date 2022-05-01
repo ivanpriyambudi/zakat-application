@@ -95,11 +95,15 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    doa: {
+      type: Object,
+      default: () => ({}),
+    },
   },
   computed: {
     totalKebutuhanAmil() {
-      if (this.amil) {
-        return this.amil.amount * this.amil.distribution
+      if (this.amil && this.doa) {
+        return (this.amil.amount * this.amil.distribution) + (this.doa.amount * this.doa.distribution)
       }
       return 0
     },

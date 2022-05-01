@@ -148,12 +148,16 @@
         @click="closeSidebar()"
       />
       <el-container class="md:tw-pl-60 sm:tw-pl-60">
-        <el-header class="tw-bg-primary tw-block sm:tw-hidden">
+        <el-header class="tw-bg-primary tw-block sm:tw-hidden header-nav">
           <el-button
             icon="el-icon-menu"
+            class="menu-navbar"
             circle
             @click="openSidebar()"
           />
+          <div class="title-header">
+            Zakat Application
+          </div>
         </el-header>
 
         <el-main>

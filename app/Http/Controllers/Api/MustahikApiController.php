@@ -35,7 +35,7 @@ class MustahikApiController extends Controller
                 'mustahik_type_id',
                 'mustahik_status_id',
             ])
-            ->paginate($this->getLimit());
+            ->paginate(100);
 
         return response()->json($mustahik);
     }
