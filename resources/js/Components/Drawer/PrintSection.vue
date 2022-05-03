@@ -1,6 +1,6 @@
 <template>
   <div id="drawer-print-section">
-    <div class="tw-px-16">
+    <div class="tw-px-4 md:tw-px-16 lg:tw-px-16">
       <div class="tw-text-center tw-mb-8">
         <img
           src="/image/print.png"

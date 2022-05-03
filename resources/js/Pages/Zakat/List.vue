@@ -3,8 +3,8 @@
     :title="'Daftar Zakat'"
     :breadcumb="breadcumb"
   >
-    <div class="tw-flex tw-w-full tw-justify-between tw-mb-2">
-      <div>
+    <ListFilterLayout>
+      <template #search>
         <form @submit.prevent="onSearch">
           <el-input
             v-model="applyFilter.name"
@@ -17,9 +17,10 @@
             </template>
           </el-input>
         </form>
-      </div>
-      <div class="tw-flex">
-        <div class="tw-mr-4">
+      </template>
+
+      <template #filter>
+        <div class="tw-mr-4 tw-mb-2 md:tw-mb-0 lg:tw-mb-0">
           <el-select
             v-model="rw_id"
             class="m-2"
@@ -34,7 +35,7 @@
             />
           </el-select>
         </div>
-        <div class="tw-mr-4">
+        <div class="tw-mr-4 tw-mb-2 md:tw-mb-0 lg:tw-mb-0">
           <el-select
             v-model="rt_id"
             class="m-2"
@@ -50,7 +51,7 @@
             />
           </el-select>
         </div>
-        <div class="tw-mr-4">
+        <div class="tw-mr-4 tw-mb-2 md:tw-mb-0 lg:tw-mb-0">
           <el-select
             v-model="type_zakat"
             class="m-2"
@@ -65,11 +66,11 @@
             />
           </el-select>
         </div>
-        <div class="tw-mr-4">
+        <div class="tw-mr-4 tw-mb-2 md:tw-mb-0 lg:tw-mb-0">
           <el-button>Data Sinkronasi</el-button>
         </div>
-      </div>
-    </div>
+      </template>
+    </ListFilterLayout>
 
     <el-divider class="tw-mb-0" />
 
@@ -141,6 +142,7 @@
 
 <script>
 import Pagination from '../../Components/Commons/Pagination'
+import ListFilterLayout from '../../Components/Commons/ListFilterLayout'
 import AdminLayout from '../../Layouts/AdminLayout'
 import {Inertia} from '@inertiajs/inertia'
 import moment from 'moment'
@@ -148,7 +150,7 @@ import { getQueryParams, getFilter, toFilter } from '../../Components/Commons/ut
 import _ from 'lodash'
 
 export default {
-  components: {AdminLayout, Pagination},
+  components: {AdminLayout, Pagination, ListFilterLayout},
   props : {
     list: {
       type: Object,

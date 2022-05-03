@@ -12,9 +12,12 @@ use Spatie\QueryBuilder\QueryBuilder;
 use App\Models\SatuanZakat;
 use App\Models\Zakat;
 use App\Models\People;
+use App\Models\Rt;
 use Inertia\Inertia;
 use Spatie\QueryBuilder\AllowedFilter;
 use Illuminate\Database\Eloquent\Builder;
+use App\Events\ZakatRecapt;
+use Illuminate\Support\Facades\Auth;
 
 class ZakatController extends Controller
 {
@@ -94,7 +97,8 @@ class ZakatController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
+        $user = Auth::user();
+
         $request->validate([
             'rw_id' => 'required|exists:rws,id',
             'rt_id' => 'required|exists:rts,id',
@@ -110,7 +114,7 @@ class ZakatController extends Controller
             'name' => $request['name'],
         ]);
 
-        Zakat::create([
+        $zakat = Zakat::create([
             'people_id' => $people->id,
             'amount_type_id' => $request['amount_type_id'],
             'amount' => $request['amount'],
@@ -118,6 +122,8 @@ class ZakatController extends Controller
         ]);
 
         session()->flash('success', 'Berhasil menambahkan Zakat');
+
+        broadcast(new ZakatRecapt($user, $zakat))->toOthers();
 
         return redirect()->back();
     }

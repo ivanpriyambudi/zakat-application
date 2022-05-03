@@ -7,6 +7,7 @@ import '/assets/custom.scss'
 // import { Inertia } from '@inertiajs/inertia'
 import print from 'vue3-print-nb'
 import { InertiaProgress } from '@inertiajs/progress'
+require('./bootstrap')
 
 InertiaProgress.init({
   color: '#5865F2',

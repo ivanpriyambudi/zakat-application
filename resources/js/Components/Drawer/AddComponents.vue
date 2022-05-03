@@ -1,6 +1,6 @@
 <template>
   <el-scrollbar height="600px">
-    <div class="tw-px-16">
+    <div class="tw-px-4 md:tw-px-16 lg:tw-px-16">
       <el-row :gutter="20">
         <el-col
           v-for="(data, index) in komponens"

@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\ZakatRecapt;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Backoffice\DashboardController;
@@ -52,5 +53,9 @@ Route::group(['prefix' => 'backoffice'], function () {
         Route::post('/recapt/set-doa', [RecaptController::class, 'setDoa']);
         Route::get('/mustahik/delete-tambahan/{id}', [RecaptController::class, 'deleteTambahan']);
         Route::post('/mustahik/update-tambahan/{id}', [RecaptController::class, 'updateTambahan']);
+
+        Route::get('/broadcast', function () {
+            broadcast(new ZakatRecapt());
+        });
     });
 });

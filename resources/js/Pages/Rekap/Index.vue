@@ -149,18 +149,41 @@ export default {
       zakatTambahanSummary: 0,
     }
   },
+  mounted() {
+    // console.log('lohh')
+    // Echo.channel('zakats')
+    //   .listen('ZakatRecapt', (e) => {
+    //     console.log('websocket', e)
+    //   })
+
+    Echo.private('zakats')
+      .listen('ZakatRecapt', (e) => {
+        console.log(e)
+        this.getZakatDataRt(false)
+      })
+  },
   created() {
     this.getZakatDataRt()
     this.getZakatTambahan()
     this.getZakatTambahanSummary()
   },
   methods: {
-    getZakatDataRt() {
-      this.loadingZakatTable = true
+    getZakatDataRt(isloading = true) {
+      if (isloading) {
+        this.loadingZakatTable = true
+      }
       axios.get('/api/backoffice/zakat-rt/recapt')
         .then(res => {
           this.zakatTable = res.data
           this.loadingZakatTable = false
+
+          if (!isloading) {
+            this.$notify({
+              title: 'Zakat baru ditambahkan',
+              message: 'Ada zakat baru ditambahkan',
+              type: 'info',
+            })
+          }
         })
     },
     getZakatTambahan(page = 1) {
