@@ -1,13 +1,12 @@
 import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/inertia-vue3'
 import ElementPlus from 'element-plus'
-import 'element-plus/dist/index.css'
-import '/assets/custom.scss'
-// import NProgress from 'nprogress'
-// import { Inertia } from '@inertiajs/inertia'
 import print from 'vue3-print-nb'
 import { InertiaProgress } from '@inertiajs/progress'
 require('./bootstrap')
+
+import 'element-plus/dist/index.css'
+import '/assets/custom.scss'
 
 InertiaProgress.init({
   color: '#5865F2',

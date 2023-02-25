@@ -50,7 +50,7 @@ export default {
     }
     
     @page {
-        size: A4;
+        size: A3;
         margin: 0;
     }
     @media print {
