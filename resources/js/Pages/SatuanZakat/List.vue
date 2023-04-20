@@ -22,7 +22,6 @@
         width="150"
       >
         <template #default="scope">
-          {{ typeof scope.row.is_primary }}
           {{ parseInt(scope.row.is_primary) !== 0 ? 'Utama' : '-' }}
           <!-- <el-switch
             v-model="scope.row.is_primary"
@@ -60,7 +59,7 @@
             Delete
           </el-button>
           <el-button
-            v-if="!scope.row.is_primary"
+            v-if="!parseInt(scope.row.is_primary)"
             size="mini"
             icon="el-icon-delete"
             round
