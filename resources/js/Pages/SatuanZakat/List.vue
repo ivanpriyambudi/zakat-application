@@ -22,6 +22,7 @@
         width="150"
       >
         <template #default="scope">
+          {{ scope.row.is_primary }}
           {{ scope.row.is_primary !== 0 ? 'Utama' : '-' }}
           <!-- <el-switch
             v-model="scope.row.is_primary"
