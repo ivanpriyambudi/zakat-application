@@ -23,13 +23,13 @@
       >
         <template #default="scope">
           {{ scope.row.is_primary }}
-          <!-- <el-switch
+          <el-switch
             v-model="scope.row.is_primary"
             :active-value="1"
             :inactive-value="0"
             :disabled="scope.row.is_primary === 1"
-            @change="onWillChangeStatus(scope)"
-          /> -->
+            @change="() => onWillChangeStatus(scope)"
+          />
         </template>
       </el-table-column>
       <el-table-column
