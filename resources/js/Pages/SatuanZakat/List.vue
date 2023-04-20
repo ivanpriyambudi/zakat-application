@@ -19,6 +19,7 @@
       />
       <el-table-column
         label="Satuan Pembagian"
+        width="150"
       >
         <template #default="scope">
           <el-switch
@@ -30,7 +31,10 @@
           />
         </template>
       </el-table-column>
-      <el-table-column align="right">
+      <el-table-column
+        width="250"
+        align="right"
+      >
         <template #header />
         <template #default="scope">
           <el-button
