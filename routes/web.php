@@ -3,15 +3,15 @@
 use App\Events\ZakatRecapt;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\Backoffice\DashboardController;
-use App\Http\Controllers\Backoffice\SatuanZakatController;
-use App\Http\Controllers\Backoffice\MustahikTypeController;
-use App\Http\Controllers\Backoffice\RwRtController;
-use App\Http\Controllers\Backoffice\ZakatController;
-use App\Http\Controllers\Backoffice\PeopleController;
-use App\Http\Controllers\Backoffice\MustahikController;
-use App\Http\Controllers\Backoffice\RecaptController;
-use App\Http\Controllers\Backoffice\MustahikStatusController;
+use App\Http\Controllers\BackOffice\DashboardController;
+use App\Http\Controllers\BackOffice\SatuanZakatController;
+use App\Http\Controllers\BackOffice\MustahikTypeController;
+use App\Http\Controllers\BackOffice\RwRtController;
+use App\Http\Controllers\BackOffice\ZakatController;
+use App\Http\Controllers\BackOffice\PeopleController;
+use App\Http\Controllers\BackOffice\MustahikController;
+use App\Http\Controllers\BackOffice\RecaptController;
+use App\Http\Controllers\BackOffice\MustahikStatusController;
 use App\Http\Middleware\AdminMiddleware;
 
 
