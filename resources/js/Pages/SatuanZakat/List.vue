@@ -22,18 +22,18 @@
         width="150"
       >
         <template #default="scope">
-          {{ scope.row.is_primary }}
-          <el-switch
+          {{ scope.row.is_primary !== 0 ? 'Utama' : '-' }}
+          <!-- <el-switch
             v-model="scope.row.is_primary"
             :active-value="1"
             :inactive-value="0"
             :disabled="scope.row.is_primary === 1"
             @change="() => onWillChangeStatus(scope)"
-          />
+          /> -->
         </template>
       </el-table-column>
       <el-table-column
-        width="250"
+        width="500"
         align="right"
       >
         <template #header />
@@ -57,6 +57,17 @@
             @click="onDelete(scope.row.id)"
           >
             Delete
+          </el-button>
+          <el-button
+            v-if="!scope.row.is_primary"
+            size="mini"
+            icon="el-icon-delete"
+            round
+            type="primary"
+            plain
+            @click="onWillChangeStatus(scope)"
+          >
+            Jadikan Utama
           </el-button>
         </template>
       </el-table-column>
