@@ -19,7 +19,7 @@
         </div>
 
         <el-divider />
-      
+
         <div
           class="tw-pb-8"
           style="margin-bottom: 50rem !important;"
@@ -168,12 +168,12 @@ export default {
     }
   },
   created() {
-    this.getData()
+    // this.getData()
   },
   methods: {
     getData() {
       axios.all([
-        axios.get('/api/backoffice/zakat-rt/recapt'), 
+        axios.get('/api/backoffice/zakat-rt/recapt'),
         axios.get('/api/backoffice/zakat-tambahan-rt/recapt'),
         axios.get('/api/backoffice/mustahik/recapt'),
       ])

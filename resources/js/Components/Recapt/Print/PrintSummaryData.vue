@@ -107,7 +107,10 @@ export default {
       return this.amil.amount * this.amil.distribution
     },
     totaKebutuhanDoa() {
-      return this.doa.amount * this.doa.distribution
+      const doaAmount = this.doa ? this.doa.amount : 0
+      const doaDist = this.doa ? this.doa.distribution : 0
+
+      return doaAmount * doaDist
     },
     totalKebutuhan() {
       return this.totalKebutuhanZakat + this.totalKebutuhanTambahan + this.totaKebutuhanAmil

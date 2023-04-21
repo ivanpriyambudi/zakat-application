@@ -33,11 +33,16 @@ export default {
     },
   },
   data() {
+    const amountAmil = this.amil ? this.amil.amount : 0
+    const amountDoa = this.doa ? this.doa.amount : 0
+    const amilDesc = this.amil ? this.amil.distribution : ''
+    const doaDesc = this.doa ? this.doa.distribution : ''
+
     return {
       data: [
         {
-          amount: this.amil.amount + this.doa.amount,
-          distribution: `${this.amil.distribution} (Amil Do'a ${this.doa.distribution})`,
+          amount: amountAmil + amountDoa,
+          distribution: `${amilDesc} (Amil Do'a ${doaDesc})`,
         },
       ],
     }
