@@ -124,7 +124,30 @@
               label="Nama"
               prop="nama"
             >
-              <el-input v-model="ruleForm.name" />
+              <el-input
+                v-model="ruleForm.name"
+                :disabled="ruleForm.names.length && ruleForm.names.length > 0"
+              />
+            </el-form-item>
+            <el-form-item
+              label="Nama Banyak"
+              prop="names"
+            >
+              <el-select
+                v-model="ruleForm.names"
+                :disabled="ruleForm.name !== ''"
+                multiple
+                filterable
+                allow-create
+                default-first-option
+                :reserve-keyword="false"
+                placeholder="Input names"
+                style="width: 100%"
+                @change="(val) => $emit(`change:${'names'}`, val)"
+              />
+              <label>
+                Gunakan "," jika ingin paste data secara banyak. Contoh: "Ivan, Mario, Handi"
+              </label>
             </el-form-item>
           </el-card>
         </el-col>

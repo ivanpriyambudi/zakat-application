@@ -19,6 +19,7 @@
           :rw="rw.data"
           :mustahik-type="mustahikType.data"
           :mustahik-status="mustahikStatus.data"
+          @change:names="testChange"
         />
       </el-col>
     </el-row>
@@ -59,9 +60,23 @@ export default defineComponent({
         },
       ],
       ruleForm: {
-        nama: '',
+        name: '',
+        names: [],
       },
     }
+  },
+  methods: {
+    testChange(val) {
+      const length = val.length
+      const lastName = val[length-1]
+
+      if (lastName && lastName.includes(',')) {
+        const newValue = lastName.split(', ')
+        this.ruleForm.names.splice(length-1)
+        const newValues = newValue.filter(el => !this.ruleForm.names.includes(el))
+        this.ruleForm.names = this.ruleForm.names.concat(newValues)
+      }
+    },
   },
 })
 </script>

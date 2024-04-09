@@ -103,10 +103,29 @@ class MustahikController extends Controller
             'rt_id' => 'required|exists:rts,id',
             'mustahik_type_id' => 'required|exists:mustahik_types,id',
             'mustahik_status_id' => 'required|exists:mustahik_statuses,id',
-            'name' => 'required|string',
+            'name' => 'nullable|string',
+            'names' => 'nullable|string',
         ]);
 
-        Mustahik::create($validated);
+        if ($validated['name']) {
+            Mustahik::create([
+                'rw_id' => $validated['rw_id'],
+                'rt_id' => $validated['rt_id'],
+                'mustahik_type_id' => $validated['mustahik_type_id'],
+                'mustahik_status_id' => $validated['mustahik_status_id'],
+                'name' => $validated['name'],
+            ]);
+        } else {
+            foreach ($validated['names'] as $name) {
+                Mustahik::create([
+                    'rw_id' => $validated['rw_id'],
+                    'rt_id' => $validated['rt_id'],
+                    'mustahik_type_id' => $validated['mustahik_type_id'],
+                    'mustahik_status_id' => $validated['mustahik_status_id'],
+                    'name' => $name,
+                ]);
+            }
+        }
 
         session()->flash('success', 'Berhasil menambahkan mustahik');
 
