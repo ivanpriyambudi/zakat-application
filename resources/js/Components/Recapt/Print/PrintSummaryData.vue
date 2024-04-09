@@ -113,7 +113,7 @@ export default {
       return doaAmount * doaDist
     },
     totalKebutuhan() {
-      return this.totalKebutuhanZakat + this.totalKebutuhanTambahan + this.totaKebutuhanAmil
+      return this.totalKebutuhanZakat + this.totalKebutuhanTambahan + this.totaKebutuhanAmil + this.totaKebutuhanDoa
     },
     dataZakat() {
       return {
@@ -139,8 +139,6 @@ export default {
     dataTable() {
       const data = []
       data.push(this.dataZakat)
-
-      console.log(this.mustahikSummary)
 
       this.mustahikSummary.map(el => {
         const datas = {

@@ -176,7 +176,6 @@ export default {
         axios.get('/api/backoffice/mustahik/recapt'),
       ])
         .then(axios.spread((zakat, tambahan, summaryMustahik) => {
-          console.log('g', zakat)
           this.zakatTable = zakat.data
           this.zakatTambahan = tambahan.data
           this.mustahikListSummary = summaryMustahik.data

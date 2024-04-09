@@ -96,7 +96,6 @@ export default {
   },
   methods: {
     onSubmit() {
-      console.log(this.amount)
       Inertia.visit(`${window.baseUrl}/recapt/set-amil`, {
         method: 'POST',
         data: {

@@ -33,7 +33,6 @@ Route::group(['prefix' => 'backoffice'], function () {
     Route::get('/zakat-tambahan/recapt', [ZakatApiController::class, 'getZakatPenerimaTambahan']);
     Route::get('/zakat-tambahan-rt/recapt', [ZakatApiController::class, 'getTambahanZakatRt']);
     Route::get('/mustahik/recapt', [ZakatApiController::class, 'getSummaryPenerima']);
-    Route::get('/mustahik/recapt', [ZakatApiController::class, 'getSummaryPenerima']);
     Route::post('/people/search', [PeopleApiController::class, 'getSearch']);
     Route::get('/zakat-tambahan/summary', [ZakatApiController::class, 'getSummaryZakatPenerimaTambahan']);
 });

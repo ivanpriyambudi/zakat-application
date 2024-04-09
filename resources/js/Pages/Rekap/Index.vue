@@ -150,12 +150,6 @@ export default {
     }
   },
   mounted() {
-    // console.log('lohh')
-    // Echo.channel('zakats')
-    //   .listen('ZakatRecapt', (e) => {
-    //     console.log('websocket', e)
-    //   })
-
     Echo.private('zakats')
       .listen('ZakatRecapt', (e) => {
         console.log(e)
