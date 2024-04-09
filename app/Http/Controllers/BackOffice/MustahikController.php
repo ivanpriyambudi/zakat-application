@@ -104,7 +104,7 @@ class MustahikController extends Controller
             'mustahik_type_id' => 'required|exists:mustahik_types,id',
             'mustahik_status_id' => 'required|exists:mustahik_statuses,id',
             'name' => 'nullable|string',
-            'names' => 'nullable|string',
+            'names' => 'nullable',
         ]);
 
         if ($validated['name']) {
