@@ -73,9 +73,17 @@ class RecaptController extends Controller
     public function setDoa(Request $request)
     {
         $amil = Doa::find(1);
-        $amil->amount = $request['amount'];
-        $amil->distribution = $request['distribution'];
-        $amil->update();
+
+        if ($amil) {
+            $amil->amount = $request['amount'];
+            $amil->distribution = $request['distribution'];
+            $amil->update();
+        } else {
+            Doa::create([
+                'amount' => $request['amount'],
+                'distribution' => $request['distribution'],
+            ]);
+        }
 
         return redirect()->back();
     }
