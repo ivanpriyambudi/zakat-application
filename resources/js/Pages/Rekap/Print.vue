@@ -22,7 +22,6 @@
 
         <div
           class="tw-pb-8"
-          style="margin-bottom: 50rem !important;"
         >
           <h1 class="tw-text-xl tw-font-semibold tw-mb-6">
             Tabel Data Penerimaan Zakat
@@ -35,7 +34,7 @@
           />
         </div>
 
-        <div style="margin-bottom: 40rem !important; padding-top: 5rem !important;">
+        <div>
           <h1 class="tw-text-xl tw-font-semibold tw-mb-6">
             Tabel Data Penggunaan Zakat
           </h1>
@@ -46,6 +45,8 @@
             class="tw-mb-20"
           />
         </div>
+
+        <div class="page-break" />
 
         <div class="tw-mt-20 tw-pt-20">
           <h1 class="tw-text-xl tw-font-semibold tw-mb-6">
@@ -61,8 +62,10 @@
           />
         </div>
 
-        <div style="margin-bottom: 40rem !important; padding-top: 5rem !important;">
-          <h1 class="tw-text-xl tw-font-semibold tw-mb-6">
+        <div class="page-break" />
+
+        <div>
+          <h1 class="tw-text-xl tw-font-semibold tw-mb-6 tw-mt-36">
             Tabel Amil
           </h1>
           <PrintAmil
@@ -72,7 +75,7 @@
           />
         </div>
 
-        <div style="padding-top: 5rem !important;">
+        <div>
           <h1 class="tw-text-xl tw-font-semibold tw-mb-6">
             Data Rekap Hasil
           </h1>
@@ -89,11 +92,6 @@
         </div>
       </div>
     </PrintLayout>
-
-    <!-- <el-empty
-      v-else
-      description="Belum ada data yang ditambahkan"
-    /> -->
   </div>
 </template>
 
@@ -194,4 +192,8 @@ export default {
 
 <style lang="scss" scoped>
 #print {}
+
+.page-break {
+            page-break-after: always;
+        }
 </style>
