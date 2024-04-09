@@ -77,7 +77,7 @@
                   <span>Setting Akun</span>
                 </template>
                 <el-menu-item index="1-1">
-                  Tahun (2022)
+                  Tahun (2024)
                 </el-menu-item>
                 <el-menu-item
                   index="1-2"
@@ -201,17 +201,17 @@ import { Link, usePage } from '@inertiajs/inertia-vue3'
 import print from 'vue3-print-nb'
 
 export default {
-  components: { 
-    AddComponents, 
-    Breadcumb, 
+  components: {
+    AddComponents,
+    Breadcumb,
     PageHeader,
-    
-    Head, 
+
+    Head,
     Link,
     PrintSection,
   },
   directives: {
-    print,   
+    print,
   },
   // eslint-disable-next-line vue/require-prop-types
   props: ['title', 'breadcumb'],

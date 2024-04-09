@@ -14,7 +14,7 @@
 
         <div class="tw-text-center tw-mb-8">
           <h1 class="tw-text-lg tw-font-semibold tw-mb-6">
-            Data Zakat Masjid Mambaul Hayat 2022
+            Data Zakat Masjid Mambaul Hayat 2024
           </h1>
         </div>
 
