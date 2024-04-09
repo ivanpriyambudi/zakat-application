@@ -179,9 +179,37 @@ class ZakatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Zakat $zakat)
     {
-        //
+        $user = Auth::user();
+
+        $request->validate([
+            'rw_id' => 'required|exists:rws,id',
+            'rt_id' => 'required|exists:rts,id',
+            'amount_type_id' => 'required|exists:satuan_zakats,id',
+            'name' => 'required|string',
+            'amount' => 'required|integer',
+            'type' => 'required|in:Donasi,Fitrah',
+        ]);
+
+        $people = People::firstOrCreate([
+            'rt_id' => $request['rt_id'],
+            'rw_id' => $request['rw_id'],
+            'name' => $request['name'],
+        ]);
+
+        $zakat->update([
+            'people_id' => $people->id,
+            'amount_type_id' => $request['amount_type_id'],
+            'amount' => $request['amount'],
+            'type' => $request['type'],
+        ]);
+
+        session()->flash('success', 'Berhasil mengubah Zakat');
+
+        broadcast(new ZakatRecapt($user, $zakat))->toOthers();
+
+        return redirect()->back();
     }
 
     /**
