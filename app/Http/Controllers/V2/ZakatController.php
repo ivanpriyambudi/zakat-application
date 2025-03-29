@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ZakatRequest;
 use App\Http\Resources\BackOffice\ZakatResource;
 use App\Models\People;
+use App\Models\YearPeriod;
 use App\Models\Zakat;
 use Exception;
 use Illuminate\Http\Request;
@@ -51,11 +52,13 @@ class ZakatController extends Controller
                 'name' => $validator['people_name'],
             ]);
 
+            $year = YearPeriod::where('is_active', true)->first();
             $zakat = Zakat::create([
                 'people_id' => $people->id,
                 'amount_type_id' => $validator['amount_type_id'],
                 'amount' => $validator['amount'],
                 'type' => $validator['type'],
+                'year_period_id' => $year->id
             ]);
 
             return $this->successMessage(ZakatResource::make($zakat), 'store', $this->modulName);
