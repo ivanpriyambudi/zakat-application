@@ -5,19 +5,18 @@ namespace App\Http\Controllers\V2;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ZakatRequest;
 use App\Http\Resources\BackOffice\ZakatResource;
+use App\Models\People;
 use App\Models\Zakat;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class ZakatController extends Controller
 {
     private $modulName = "Zakat";
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $data = QueryBuilder::for(Zakat::class)
@@ -40,37 +39,37 @@ class ZakatController extends Controller
         return ZakatResource::collection($data);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(ZakatRequest $request)
     {
         $validator = $request->safe()->all();
-        $satuanZakat = Zakat::create($validator);
-        return $this->successMessage(ZakatResource::make($satuanZakat), 'store', $this->modulName);
+
+        DB::beginTransaction();
+        try {
+            $people = People::firstOrCreate([
+                'rt_id' => $validator['rt_id'],
+                'rw_id' => $validator['rw_id'],
+                'name' => $validator['name'],
+            ]);
+
+            $zakat = Zakat::create([
+                'people_id' => $people->id,
+                'amount_type_id' => $validator['amount_type_id'],
+                'amount' => $validator['amount'],
+                'type' => $validator['type'],
+            ]);
+
+            return $this->successMessage(ZakatResource::make($zakat), 'store', $this->modulName);
+        } catch (Exception $error) {
+            DB::rollback();
+            throw $error;
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show(Zakat $zakat)
     {
         return ZakatResource::make($zakat);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(ZakatRequest $request, Zakat $zakat)
     {
         $validator = $request->safe()->all();
@@ -78,12 +77,6 @@ class ZakatController extends Controller
         return $this->successMessage(ZakatResource::make($zakat), 'update', $this->modulName);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Zakat $zakat)
     {
         $zakat->delete();

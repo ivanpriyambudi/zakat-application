@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\ZakatTypeEnum;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ZakatRequest extends FormRequest
 {
@@ -24,7 +26,13 @@ class ZakatRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'people_name' => 'required',
+            'people_id' => 'nullable|exists:people,id',
+            'rw_id' => 'required|exists:rws,id',
+            'rt_id' => 'required|exists:rts,id',
+            'type' => ['required', Rule::in(ZakatTypeEnum::getValues())],
+            'amount_type_id' => 'required|exists:satuan_zakats,id',
+            'amount' => 'required|numeric',
         ];
     }
 }
