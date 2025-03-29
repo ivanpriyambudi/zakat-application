@@ -27,7 +27,6 @@ class ZakatRequest extends FormRequest
     {
         return [
             'people_name' => 'required',
-            'people_id' => 'nullable|exists:people,id',
             'rw_id' => 'required|exists:rws,id',
             'rt_id' => 'required|exists:rts,id',
             'type' => ['required', Rule::in(ZakatTypeEnum::getValues())],
