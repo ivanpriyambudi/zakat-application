@@ -48,7 +48,7 @@ class ZakatController extends Controller
             $people = People::firstOrCreate([
                 'rt_id' => $validator['rt_id'],
                 'rw_id' => $validator['rw_id'],
-                'name' => $validator['name'],
+                'name' => $validator['people_name'],
             ]);
 
             $zakat = Zakat::create([
