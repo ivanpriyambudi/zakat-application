@@ -10,6 +10,7 @@ use App\Models\Mustahik;
 use App\Models\MustahikStatus;
 use App\Http\Resources\BackOffice\RwResource;
 use App\Http\Resources\BackOffice\MustahikStatusResource;
+use App\Models\YearPeriod;
 use Spatie\QueryBuilder\QueryBuilder;
 use Inertia\Inertia;
 
@@ -25,10 +26,18 @@ class DashboardController extends Controller
 
         $satuan = SatuanZakat::where('is_primary', 1)->first();
 
+        $year = date("Y");
+        $yearActive = YearPeriod::active()->first();
+
+        if ($yearActive) {
+            $year = $yearActive->year;
+        }
+
         return Inertia::render('Dashboard', [
             'rw' => RwResource::collection($rw),
             'countAllMustahik' => $countAllMustahik,
             'satuan' => $satuan,
+            'year' => $year
         ]);
     }
 }

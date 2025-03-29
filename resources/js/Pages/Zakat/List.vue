@@ -67,6 +67,22 @@
           </el-select>
         </div>
         <div class="tw-mr-4 tw-mb-2 md:tw-mb-0 lg:tw-mb-0">
+          <el-select
+            v-if="year && year.data.length"
+            v-model="years"
+            class="m-2"
+            placeholder="Select Tahun"
+            size="large"
+          >
+            <el-option
+              v-for="(item, index) in year.data"
+              :key="`list-type-${index}`"
+              :label="item.year"
+              :value="item.year"
+            />
+          </el-select>
+        </div>
+        <div class="tw-mr-4 tw-mb-2 md:tw-mb-0 lg:tw-mb-0">
           <el-button>Data Sinkronasi</el-button>
         </div>
       </template>
@@ -160,6 +176,10 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    year: {
+      type: Object,
+      default: () => ({}),
+    },
   },
   data() {
     const query = getQueryParams(window.location.search)
@@ -179,6 +199,7 @@ export default {
         rt_id: _.get(query, 'filter.rt_id'),
         type: _.get(query, 'filter.type'),
         name: _.get(query, 'filter.name'),
+        year: _.get(query, 'filter.year'),
       },
     }
   },
@@ -212,6 +233,14 @@ export default {
       },
       set(value) {
         return toFilter(this.currentQuery, value, 'type')
+      },
+    },
+    years: {
+      get() {
+        return getFilter(this.applyFilter, 'year')
+      },
+      set(value) {
+        return toFilter(this.currentQuery, value, 'year')
       },
     },
   },

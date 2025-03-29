@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\YearController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\KodeGeneratorController;
@@ -35,4 +36,5 @@ Route::group(['prefix' => 'backoffice'], function () {
     Route::get('/mustahik/recapt', [ZakatApiController::class, 'getSummaryPenerima']);
     Route::post('/people/search', [PeopleApiController::class, 'getSearch']);
     Route::get('/zakat-tambahan/summary', [ZakatApiController::class, 'getSummaryZakatPenerimaTambahan']);
+    Route::get('/years', [YearController::class, 'getData']);
 });

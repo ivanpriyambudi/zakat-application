@@ -9,6 +9,7 @@ use App\Models\Rt;
 use App\Models\SatuanZakat;
 use App\Models\MustahikStatus;
 use App\Models\Mustahik;
+use App\Models\YearPeriod;
 use Illuminate\Support\Facades\DB;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -16,12 +17,19 @@ class ZakatApiController extends Controller
 {
     public function getAmountZakat()
     {
-        $year = date("Y");
+        $sums = 0;
+        $yearActive = YearPeriod::active()->first();
+
+        if (!$yearActive) {
+            return response()->json($sums);
+        }
+
+        $year = $yearActive->year;
+
         $zakat = Zakat::whereYear('created_at', '=', $year)
             ->get();
 
         $zakats = $zakat->groupBy('amount_type_id');
-        $sums = 0;
 
         foreach ($zakats as $key => $value) {
             $satuan = SatuanZakat::find($key);
@@ -143,7 +151,14 @@ class ZakatApiController extends Controller
 
     public function getRecentZakat()
     {
-        $year = date("Y");
+        $yearActive = YearPeriod::active()->first();
+
+        if (!$yearActive) {
+            return response()->json([]);
+        }
+
+        $year = $yearActive->year;
+
         $zakat = Zakat::whereYear('created_at', '=', $year)
             ->with([
                 'people',

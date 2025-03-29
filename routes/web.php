@@ -12,6 +12,7 @@ use App\Http\Controllers\BackOffice\PeopleController;
 use App\Http\Controllers\BackOffice\MustahikController;
 use App\Http\Controllers\BackOffice\RecaptController;
 use App\Http\Controllers\BackOffice\MustahikStatusController;
+use App\Http\Controllers\BackOffice\YearPeriodController;
 use App\Http\Middleware\AdminMiddleware;
 
 
@@ -41,6 +42,7 @@ Route::group(['prefix' => 'backoffice'], function () {
         Route::resource('mustahik-type', MustahikTypeController::class);
         Route::resource('rw-rt', RwRtController::class);
         Route::resource('mustahik-status', MustahikStatusController::class);
+        Route::resource('year', YearPeriodController::class)->only(['store']);
 
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::post('/rw-rt/rt', [RwRtController::class, 'storeRt']);
@@ -53,6 +55,7 @@ Route::group(['prefix' => 'backoffice'], function () {
         Route::post('/recapt/set-doa', [RecaptController::class, 'setDoa']);
         Route::get('/mustahik/delete-tambahan/{id}', [RecaptController::class, 'deleteTambahan']);
         Route::post('/mustahik/update-tambahan/{id}', [RecaptController::class, 'updateTambahan']);
+        Route::post('/switch-year', [YearPeriodController::class, 'switchYear']);
 
         Route::get('/broadcast', function () {
             broadcast(new ZakatRecapt());

@@ -30,12 +30,24 @@ class People extends Model
     public function zakatYear()
     {
         $year = date("Y");
+        $yearActive = YearPeriod::active()->first();
+
+        if ($yearActive) {
+            $year = $yearActive->year;
+        }
+
         return $this->hasMany(Zakat::class)->whereYear('created_at', '=', $year)->with('amount_type');
     }
 
     public function zakatFitrahYear()
     {
         $year = date("Y");
+        $yearActive = YearPeriod::active()->first();
+
+        if ($yearActive) {
+            $year = $yearActive->year;
+        }
+
         return $this->hasMany(Zakat::class)
             ->whereYear('created_at', '=', $year)
             ->where('type', 'Fitrah')
@@ -45,6 +57,12 @@ class People extends Model
     public function donasiYear()
     {
         $year = date("Y");
+        $yearActive = YearPeriod::active()->first();
+
+        if ($yearActive) {
+            $year = $yearActive->year;
+        }
+
         return $this->hasMany(Zakat::class)
             ->whereYear('created_at', '=', $year)
             ->where('type', 'Donasi')

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\BackOffice;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\BackOffice\YearPeriodResource;
 use Illuminate\Http\Request;
 use App\Models\Rw;
 use App\Http\Resources\BackOffice\RwResource;
@@ -17,6 +18,7 @@ use Inertia\Inertia;
 use Spatie\QueryBuilder\AllowedFilter;
 use Illuminate\Database\Eloquent\Builder;
 use App\Events\ZakatRecapt;
+use App\Models\YearPeriod;
 use Illuminate\Support\Facades\Auth;
 
 class ZakatController extends Controller
@@ -47,6 +49,9 @@ class ZakatController extends Controller
                         $query->where('rt_id', $value);
                     });
                 }),
+                AllowedFilter::callback('year', function (Builder $query, $value) {
+                    $query->whereYear('created_at', $value);
+                }),
                 AllowedFilter::callback('name', function (Builder $query, $value) {
                     $query->whereHas('people', function ($query) use ($value) {
                         $query->where('name', $value);
@@ -61,9 +66,13 @@ class ZakatController extends Controller
             ])
             ->get();
 
+        $year = QueryBuilder::for(YearPeriod::class)
+            ->get();
+
         return Inertia::render('Zakat/List', [
             'list' => ZakatResource::collection($zakat),
             'rw' => RwResource::collection($rw),
+            'year' => YearPeriodResource::collection($year),
         ]);
     }
 

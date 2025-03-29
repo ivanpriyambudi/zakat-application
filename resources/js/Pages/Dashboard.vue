@@ -56,6 +56,7 @@
         <CountZakatTable
           v-loading="loadingZakatTable"
           :data="zakatTable"
+          :year="year"
           class="tw-mb-6"
         />
       </el-col>
@@ -117,6 +118,10 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    year: {
+      type: String,
+      default: '',
+    },
   },
   data() {
     return {
@@ -130,7 +135,6 @@ export default {
       loadingZakatTable: false,
       loadingQuickRecapt: false,
       loadingRecentZakat: false,
-      year: new Date().getFullYear(),
     }
   },
   mounted() {

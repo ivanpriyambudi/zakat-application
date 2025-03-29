@@ -63,6 +63,10 @@ export default {
       type: Array,
       default: () => ([]),
     },
+    year: {
+      type: String,
+      default: '',
+    },
   },
   methods: {
     onAddZakat(data) {
@@ -75,7 +79,7 @@ export default {
       const rwId = data.data.rw_id
       const rtId = data.data.id
 
-      Inertia.get('/backoffice/zakat', { 'filter[rw_id]': rwId, 'filter[rt_id]': rtId }, { replace: true })
+      Inertia.get('/backoffice/zakat', { 'filter[rw_id]': rwId, 'filter[rt_id]': rtId, 'filter[year]': this.year }, { replace: true })
     },
   },
 }

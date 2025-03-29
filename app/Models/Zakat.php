@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,6 +15,7 @@ class Zakat extends Model
         'amount_type_id',
         'amount',
         'type',
+        'year_period_id'
     ];
 
     public function people()
@@ -26,8 +28,22 @@ class Zakat extends Model
         return $this->belongsTo(SatuanZakat::class);
     }
 
-    public function amount()
+    public function year_period()
     {
-        return $this->belongsTo(People::class);
+        return $this->belongsTo(YearPeriod::class, 'year_period_id');
+    }
+
+    public function scopeRw(Builder $query, $value)
+    {
+        return $query->whereHas('people', function ($query) use ($value) {
+            $query->where('rw_id', $value);
+        });
+    }
+
+    public function scopeRt(Builder $query, $value)
+    {
+        return $query->whereHas('people', function ($query) use ($value) {
+            $query->where('rt_id', $value);
+        });
     }
 }
