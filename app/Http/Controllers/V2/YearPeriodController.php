@@ -5,18 +5,18 @@ namespace App\Http\Controllers\V2;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\YearPeriodRequest;
 use App\Http\Resources\YearPeriodResource;
+use App\Models\DistributionSetting;
+use App\Models\SatuanZakat;
 use App\Models\YearPeriod;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class YearPeriodController extends Controller
 {
     private $modulName = "Tahun";
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $data = QueryBuilder::for(YearPeriod::class)
@@ -28,37 +28,35 @@ class YearPeriodController extends Controller
         return YearPeriodResource::collection($data);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(YearPeriodRequest $request)
     {
         $validator = $request->safe()->all();
-        $yearPeriod = YearPeriod::create($validator);
-        return $this->successMessage(YearPeriodResource::make($yearPeriod), 'store', $this->modulName);
+
+        DB::beginTransaction();
+        try {
+            $yearPeriod = YearPeriod::create($validator);
+            $satuanPrimary = SatuanZakat::where('is_primary', true)->first();
+
+            DistributionSetting::firstOrCreate([
+                'mustahik_distribution_setting' => [],
+                'satuan_zakat_id' => $satuanPrimary->id,
+                'year_period_id' => $yearPeriod->id,
+            ]);
+
+            DB::commit();
+
+            return $this->successMessage(YearPeriodResource::make($yearPeriod), 'store', $this->modulName);
+        } catch (Exception $error) {
+            DB::rollback();
+            throw $error;
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show(YearPeriod $yearPeriod)
     {
         return YearPeriodResource::make($yearPeriod);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(YearPeriodRequest $request, YearPeriod $yearPeriod)
     {
         $validator = $request->safe()->all();
@@ -66,12 +64,6 @@ class YearPeriodController extends Controller
         return $this->successMessage(YearPeriodResource::make($yearPeriod), 'update', $this->modulName);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(YearPeriod $yearPeriod)
     {
         $yearPeriod->delete();

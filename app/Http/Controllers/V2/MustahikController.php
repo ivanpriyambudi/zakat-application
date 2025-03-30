@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\MustahikRequest;
 use App\Http\Resources\BackOffice\MustahikResource;
 use App\Models\Mustahik;
+use App\Models\MustahikYearPeriod;
+use App\Models\YearPeriod;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -14,11 +16,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 class MustahikController extends Controller
 {
     private $modulName = "Mustahik";
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $data = QueryBuilder::for(Mustahik::class)
@@ -30,12 +28,6 @@ class MustahikController extends Controller
         return MustahikResource::collection($data);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(MustahikRequest $request)
     {
         $validator = $request->safe()->all();
@@ -44,23 +36,40 @@ class MustahikController extends Controller
         try {
 
             if (!$validator['names']) {
-                $mustahikType = Mustahik::create($validator);
+                $mustahik = Mustahik::create($validator);
+
+                if ($validator['is_mustahik_year']) {
+                    $year = YearPeriod::active()->first();
+                    MustahikYearPeriod::create([
+                        'year_period_id' => $year->id,
+                        'mustahik_id' => $mustahik->id,
+                    ]);
+                }
+
                 DB::commit();
 
-                return $this->successMessage(MustahikResource::make($mustahikType), 'store', $this->modulName);
+                return $this->successMessage(MustahikResource::make($mustahik), 'store', $this->modulName);
             }
 
             if ($validator['names']) {
                 $mustahiks = collect();
+                $year = YearPeriod::active()->first();
 
                 foreach ($validator['names'] as $item) {
-                    $mustahikType = Mustahik::create([
+                    $mustahik = Mustahik::create([
                         'rw_id' => $validator['rw_id'],
                         'rt_id' => $validator['rt_id'],
                         'mustahik_type_id' => $validator['mustahik_type_id'],
                         'name' => $item
                     ]);
-                    $mustahiks->push($mustahikType);
+                    $mustahiks->push($mustahik);
+
+                    if ($validator['is_mustahik_year']) {
+                        MustahikYearPeriod::create([
+                            'year_period_id' => $year->id,
+                            'mustahik_id' => $mustahik->id,
+                        ]);
+                    }
                 }
 
                 DB::commit();
@@ -73,24 +82,11 @@ class MustahikController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show(Mustahik $mustahik)
     {
         return MustahikResource::make($mustahik);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(MustahikRequest $request, Mustahik $mustahik)
     {
         $validator = $request->safe()->all();
@@ -98,12 +94,6 @@ class MustahikController extends Controller
         return $this->successMessage(MustahikResource::make($mustahik), 'update', $this->modulName);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Mustahik $mustahik)
     {
         $mustahik->delete();

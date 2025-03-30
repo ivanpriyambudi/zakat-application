@@ -11,11 +11,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 class PeopleController extends Controller
 {
     private $modulName = "Warga";
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $data = QueryBuilder::for(People::class)
@@ -31,24 +27,11 @@ class PeopleController extends Controller
         return PeopleResource::collection($data);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show(People $people)
     {
         return PeopleResource::make($people);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(PeopleRequest $request, People $people)
     {
         $validator = $request->safe()->all();
@@ -56,12 +39,6 @@ class PeopleController extends Controller
         return $this->successMessage(PeopleResource::make($people), 'update', $this->modulName);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(People $people)
     {
         $people->delete();

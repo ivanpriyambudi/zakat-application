@@ -61,6 +61,8 @@ class ZakatController extends Controller
                 'year_period_id' => $year->id
             ]);
 
+            DB::commit();
+
             return $this->successMessage(ZakatResource::make($zakat), 'store', $this->modulName);
         } catch (Exception $error) {
             DB::rollback();

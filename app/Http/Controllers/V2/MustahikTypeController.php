@@ -12,11 +12,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 class MustahikTypeController extends Controller
 {
     private $modulName = "Mustahik Type";
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $data = QueryBuilder::for(MustahikType::class)
@@ -28,12 +24,6 @@ class MustahikTypeController extends Controller
         return MustahikTypeResource::collection($data);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(MustahikTyoeRequest $request)
     {
         $validator = $request->safe()->all();
@@ -41,24 +31,11 @@ class MustahikTypeController extends Controller
         return $this->successMessage(MustahikTypeResource::make($mustahikType), 'store', $this->modulName);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show(MustahikType $mustahikType)
     {
         return MustahikTypeResource::make($mustahikType);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(MustahikTyoeRequest $request, MustahikType $mustahikType)
     {
         $validator = $request->safe()->all();
@@ -66,12 +43,6 @@ class MustahikTypeController extends Controller
         return $this->successMessage(MustahikTypeResource::make($mustahikType), 'update', $this->modulName);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(MustahikType $mustahikType)
     {
         $mustahikType->delete();
