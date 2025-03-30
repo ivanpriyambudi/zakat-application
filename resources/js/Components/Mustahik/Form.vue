@@ -126,7 +126,7 @@
             >
               <el-input
                 v-model="ruleForm.name"
-                :disabled="ruleForm.names.length && ruleForm.names.length > 0"
+                :disabled="Array.isArray(ruleForm.names) && ruleForm.names.length && ruleForm.names.length > 0"
               />
             </el-form-item>
             <el-form-item
