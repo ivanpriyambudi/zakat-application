@@ -123,11 +123,13 @@ class ZakatController extends Controller
             'name' => $request['name'],
         ]);
 
+        $year = YearPeriod::active()->first();
         $zakat = Zakat::create([
             'people_id' => $people->id,
             'amount_type_id' => $request['amount_type_id'],
             'amount' => $request['amount'],
             'type' => $request['type'],
+            'year_period_id' => $year->id
         ]);
 
         session()->flash('success', 'Berhasil menambahkan Zakat');

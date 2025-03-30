@@ -156,6 +156,7 @@ class MustahikController extends Controller
                 'rw',
                 'rt',
                 'mustahik_type',
+                'mustahik_status',
             ])
             ->first();
 
@@ -168,10 +169,14 @@ class MustahikController extends Controller
         $mustahik_type = QueryBuilder::for(MustahikType::class)
             ->get();
 
+        $mustahik_status = QueryBuilder::for(MustahikStatus::class)
+            ->get();
+
         return Inertia::render('Mustahik/Edit', [
             'mustahik' => $mustahik,
             'rw' => RwResource::collection($rw),
             'mustahikType' => MustahikTypeResource::collection($mustahik_type),
+            'mustahikStatus' => MustahikStatusResource::collection($mustahik_status),
         ]);
     }
 

@@ -126,10 +126,11 @@
             >
               <el-input
                 v-model="ruleForm.name"
-                :disabled="Array.isArray(ruleForm.names) && ruleForm.names.length && ruleForm.names.length > 0"
+                :disabled="method === 'POST' && Array.isArray(ruleForm.names) && ruleForm.names.length && ruleForm.names.length > 0"
               />
             </el-form-item>
             <el-form-item
+              v-if="method === 'POST'"
               label="Nama Banyak"
               prop="names"
             >

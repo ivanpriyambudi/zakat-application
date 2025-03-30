@@ -66,6 +66,7 @@ export default defineComponent({
         rw_id: this.mustahik.rw_id,
         rt_id: this.mustahik.rt_id,
         mustahik_type_id: this.mustahik.mustahik_type_id,
+        mustahik_status_id: this.mustahik.mustahik_status_id,
         name: this.mustahik.name,
       },
     }
