@@ -29,13 +29,15 @@ Route::middleware(['auth:api'])->group(function () {
     Route::resource('rt', RtController::class);
     Route::resource('mustahik-type', MustahikTypeController::class);
     Route::resource('mustahik', MustahikController::class);
-    Route::resource('mustahik-year-period', MustahikYearPeriodController::class);
     Route::resource('people', PeopleController::class);
     Route::resource('zakat', ZakatController::class);
     Route::resource('year-period', YearPeriodController::class);
-    Route::resource('distribution-setting-item', DistributionSettingItemController::class);
+    Route::resource('mustahik-year-period', MustahikYearPeriodController::class);
     Route::resource('distribution-setting', DistributionSettingController::class);
+    Route::resource('distribution-setting-item', DistributionSettingItemController::class);
 
     Route::get('/recapt/dashboard', [RecaptController::class, 'dashboard']);
     Route::post('/recapt/setting/mustahik', [RecaptController::class, 'storeMustahik']);
+    Route::get('/recapt/per-rt', [RecaptController::class, 'recaptPerRt']);
+    Route::get('/recapt/per-rt-penerima', [RecaptController::class, 'recaptPerRtPenerima']);
 });

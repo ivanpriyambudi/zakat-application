@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -35,5 +36,10 @@ class Mustahik extends Model
     public function mustahik_status()
     {
         return $this->belongsTo(MustahikStatus::class);
+    }
+
+    public function scopeKeyword(Builder $query, $value)
+    {
+        return $query->where('name', 'like', '%' . $value . '%');
     }
 }

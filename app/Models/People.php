@@ -39,6 +39,13 @@ class People extends Model
         return $this->hasMany(Zakat::class)->whereYear('created_at', '=', $year)->with('amount_type');
     }
 
+    public function zakatYearV2()
+    {
+        $yearActive = YearPeriod::active()->first();
+
+        return $this->hasMany(Zakat::class)->where('year_period_id', $yearActive->id)->with('amount_type');
+    }
+
     public function zakatFitrahYear()
     {
         $year = date("Y");
@@ -54,6 +61,16 @@ class People extends Model
             ->with('amount_type');
     }
 
+    public function zakatFitrahYearV2()
+    {
+        $yearActive = YearPeriod::active()->first();
+
+        return $this->hasMany(Zakat::class)
+            ->where('year_period_id', $yearActive->id)
+            ->where('type', 'Fitrah')
+            ->with('amount_type');
+    }
+
     public function donasiYear()
     {
         $year = date("Y");
@@ -65,6 +82,16 @@ class People extends Model
 
         return $this->hasMany(Zakat::class)
             ->whereYear('created_at', '=', $year)
+            ->where('type', 'Donasi')
+            ->with('amount_type');
+    }
+
+    public function donasiYearV2()
+    {
+        $yearActive = YearPeriod::active()->first();
+
+        return $this->hasMany(Zakat::class)
+            ->where('year_period_id',  $yearActive->id)
             ->where('type', 'Donasi')
             ->with('amount_type');
     }

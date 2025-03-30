@@ -11,6 +11,7 @@ use App\Models\YearPeriod;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class MustahikController extends Controller
@@ -20,6 +21,13 @@ class MustahikController extends Controller
     public function index()
     {
         $data = QueryBuilder::for(Mustahik::class)
+            ->with([
+                'rw',
+                'rt'
+            ])
+            ->allowedFilters([
+                AllowedFilter::scope('keyword')
+            ])
             ->allowedSorts([
                 'created_at',
             ])
